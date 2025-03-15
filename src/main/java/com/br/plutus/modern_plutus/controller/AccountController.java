@@ -16,19 +16,19 @@ public class AccountController {
         private List<Account> accounts = new ArrayList<>();
 
 
-        @GetMapping("/categories")
+        @GetMapping("/account")
         public List<Account> index(){
             return accounts;
         }
 
-        @PostMapping("/categories")
+        @PostMapping("/account")
         public ResponseEntity<Account> create(@RequestBody Account account){
             accounts.add(account);
             System.out.println("Cadastrando conta " + account.getName());
             return ResponseEntity.status(201).body(account);
         }
 
-        @GetMapping("/categories/{id}")
+        @GetMapping("/account/{id}")
         public ResponseEntity<Account> getUniqueAccount(@PathVariable Long id){
             var accountInfo = accounts.stream().filter( accountFiltred -> accountFiltred.getId().equals(id))
                     .findFirst();
