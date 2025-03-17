@@ -105,12 +105,19 @@ public class AccountController {
             return ResponseEntity.badRequest().body(null);
         }
 
-        originAccount.get().setInitialCredit(originAccount.get().getInitialCredit() - pixRequest.getAmount());
-        destinationAccount.get().setInitialCredit(destinationAccount.get().getInitialCredit() + pixRequest.getAmount());
+        double newOriginCredit = originAccount.get().getInitialCredit() - pixRequest.getAmount();
+        double newDestinationCredit = destinationAccount.get().getInitialCredit() + pixRequest.getAmount();
+
+        originAccount.get().setInitialCredit(newOriginCredit);
+        destinationAccount.get().setInitialCredit(newDestinationCredit);
+
+        originAccount.get().setAmount(newOriginCredit);
+        destinationAccount.get().setAmount(newDestinationCredit);
 
         log.info("PIX realizado com sucesso! Valor: R$ " + pixRequest.getAmount());
         return ResponseEntity.ok(originAccount.get());
     }
+
 
     @DeleteMapping("account/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
