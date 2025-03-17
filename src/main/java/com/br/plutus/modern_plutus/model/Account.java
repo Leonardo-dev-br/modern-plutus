@@ -97,22 +97,20 @@ public class Account {
         this.amount = amount;
     }
 
+
     @Override
     public String toString() {
-        return "Conta{" +
-                "CPF do titular='" + cpfHolder + '\'' +
-                ", Numero de conta=" + numberAccount +
-                ", Numero da agência=" + numberAgency +
-                ", Nome do titular='" + nameHolder + '\'' +
-                ", Data de abertura=" + dateOpening +
-                ", Saldo inicial=" + initialCredit +
-                ", Ativação da conta=" + activeAccount +
-                ", Tipo de conta='" + typeAccount + '\'' +
+        return "Account{" +
+                "idHolder=" + idHolder +
+                ", cpfHolder=" + cpfHolder +
+                ", numberAccount=" + numberAccount +
+                ", numberAgency=" + numberAgency +
+                ", nameHolder='" + nameHolder + '\'' +
+                ", dateOpening=" + dateOpening +
+                ", initialCredit=" + initialCredit +
+                ", activeAccount=" + activeAccount +
+                ", typeAccount='" + typeAccount + '\'' +
+                ", amount=" + amount +
                 '}';
     }
-
-
-
-     
-    
 }
