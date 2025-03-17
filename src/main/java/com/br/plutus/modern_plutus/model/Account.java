@@ -13,10 +13,11 @@ public class Account {
     private double initialCredit;
     private boolean activeAccount;
     private String typeAccount;
+    private double amount;
 
 
      public Account(Long cpfHolder, int numberAccount, int numberAgency, String nameHolder,
-                   LocalDate dateOpening, double initialCredit, boolean activeAccount, String typeAccount) {
+                   LocalDate dateOpening, double initialCredit, boolean activeAccount, String typeAccount, double amount) {
         this.cpfHolder = cpfHolder;
         this.numberAccount = numberAccount;
         this.numberAgency = numberAgency;
@@ -25,6 +26,7 @@ public class Account {
         this.initialCredit = initialCredit;
         this.activeAccount = activeAccount;
         this.typeAccount = typeAccount;
+        this.amount = amount;
     }
 
 
@@ -84,6 +86,16 @@ public class Account {
     public void setTypeAccount(String typeAccount) {
         this.typeAccount = typeAccount;
     }
+    
+    
+    public double getAmount() {
+        return amount;
+    }
+
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
 
     @Override
     public String toString() {
@@ -98,6 +110,8 @@ public class Account {
                 ", Tipo de conta='" + typeAccount + '\'' +
                 '}';
     }
+
+
 
      
     

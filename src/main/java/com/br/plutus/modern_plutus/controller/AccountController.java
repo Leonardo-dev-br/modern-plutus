@@ -150,4 +150,22 @@ public class AccountController {
         return ResponseEntity.ok("Conta desativada com sucesso.");
     }
 
+    @PutMapping("/account/{id}/update-amount")
+public ResponseEntity<?> updateAmount(@PathVariable Long id, @RequestBody Account request) {
+    Optional<Account> accountOpt = accounts.stream()
+            .filter(acc -> acc.getIdHolder().equals(id))
+            .findFirst();
+
+    if (accountOpt.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Conta não encontrada.");
+    }
+
+    Account account = accountOpt.get();
+
+    double newAmount = account.getInitialCredit() + request.getAmount();
+    account.setAmount(newAmount);
+
+    return ResponseEntity.ok(account);
+}
+
 }
