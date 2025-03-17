@@ -3,9 +3,9 @@ package com.br.plutus.modern_plutus.model;
 import java.time.LocalDate;
 
 public class Account {
-    
-    private int idHolder;
-    private int cpfHolder;
+
+    private Long idHolder;
+    private Long cpfHolder;
     private int numberAccount;
     private int numberAgency;
     private String nameHolder;
@@ -13,9 +13,9 @@ public class Account {
     private double initialCredit;
     private boolean activeAccount;
     private String typeAccount;
-    
 
-     public Account(int cpfHolder, int numberAccount, int numberAgency, String nameHolder, 
+
+     public Account(Long cpfHolder, int numberAccount, int numberAgency, String nameHolder,
                    LocalDate dateOpening, double initialCredit, boolean activeAccount, String typeAccount) {
         this.cpfHolder = cpfHolder;
         this.numberAccount = numberAccount;
@@ -28,18 +28,18 @@ public class Account {
     }
 
 
-    public int getIdHolder() {
+    public Long getIdHolder() {
         return idHolder;
     }
 
-    public void setIdHolder(int idHolder) {
+    public void setIdHolder(Long idHolder) {
         this.idHolder = idHolder;
     }
 
-    public int getCpfHolder() {
+    public Long getCpfHolder() {
         return cpfHolder;
     }
-    public void setCpfHolder(int cpfHolder) {
+    public void setCpfHolder(Long cpfHolder) {
         this.cpfHolder = cpfHolder;
     }
     public int getNumberAccount() {

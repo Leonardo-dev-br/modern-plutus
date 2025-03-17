@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -34,39 +35,14 @@ public class AccountController {
             return accounts;
         }
 
-        @PostMapping("/account")
-        public ResponseEntity<Account> createAccount(@RequestBody Account account){
-            accounts.add(account);
-            System.out.println("Cadastrando conta " + account.getNameHolder());
-            return ResponseEntity.status(201).body(account);
-        }
-
         @GetMapping("/account/{id}")
         public ResponseEntity<Account> getUniqueAccount(@PathVariable Long id){
             var accountInfo = accounts.stream().filter( accountFiltred -> accountFiltred.getIdHolder().equals(id))
                     .findFirst();
-            System.out.println("Buscando conta " + id);
+            log.info("Buscando conta " + id);
             if(accountInfo.isEmpty())
                 return ResponseEntity.notFound().build(); 
             return ResponseEntity.ok(accountInfo.get());
-        }
-
-        @DeleteMapping("{id}")
-        @ResponseStatus(HttpStatus.NO_CONTENT)
-        public void eliminate(@PathVariable Long id) {
-            log.info("Apagando conta " + id);
-            accounts.remove(getAccount(id));
-        }
-
-        @PutMapping("{id}")
-        public Account updateAccount(@PathVariable Long id, @RequestBody Account account) {
-            log.info("Atualizando conta " + id + " " + account);
-
-            accounts.remove(getAccount(id));
-            account.setIdHolder(id);
-            accounts.add(account);
-
-            return account;
         }
 
         private Account getAccount(Long id) {
@@ -76,6 +52,32 @@ public class AccountController {
                     .orElseThrow(
                             () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta " + id + " não encontrada")
                     );
+        }
+
+        @JsonFormat(pattern = "yyyy/MM/dd")
+        @PostMapping("/account")
+        public ResponseEntity<Account> createAccount(@RequestBody Account account){
+            accounts.add(account);
+            log.info("Cadastrando conta de: " + account.getNameHolder());
+            return ResponseEntity.status(201).body(account);
+        }
+
+        @DeleteMapping("account/{id}")
+        @ResponseStatus(HttpStatus.NO_CONTENT)
+        public void exterminateAccount(@PathVariable Long id) {
+            log.info("Apagando conta de ID: " + id);
+            accounts.remove(getAccount(id));
+        }
+
+        @PutMapping("{id}")
+        public Account updateAccount(@PathVariable Long id, @RequestBody Account account) {
+            log.info("Atualizando conta de: " + id + " " + account);
+
+            accounts.remove(getAccount(id));
+            account.setIdHolder(id);
+            accounts.add(account);
+
+            return account;
         }
 
 }
